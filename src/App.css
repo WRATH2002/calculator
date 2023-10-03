@@ -16,6 +16,11 @@
   -webkit-box-shadow: 7px 7px 20px #d9d9e2, -7px -7px 20px #ffffff;
   box-shadow: 7px 7px 20px #d9d9e2, -7px -7px 20px #ffffff;
 }
+.neomorphisminside {
+  /* border-radius: 50px; */
+  background: #eeeef8;
+  box-shadow: inset 7px 7px 14px #dddde7, inset -7px -7px 14px #ffffff;
+}
 
 @font-face {
   font-family: timer;
