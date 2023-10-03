@@ -7,6 +7,8 @@ import { LiaMinusSolid } from "react-icons/lia";
 import { LiaPlusSolid } from "react-icons/lia";
 import { LiaEqualsSolid } from "react-icons/lia";
 import { RiDeleteBack2Line } from "react-icons/ri";
+import { IoIosSwap } from "react-icons/io";
+import { AiOutlinePercentage } from "react-icons/ai";
 import { useEffect, useState } from "react";
 // import { LiaDivideSolid } from "react-icons/lia";
 
@@ -228,7 +230,7 @@ function App() {
               className="neomorphism  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer bg-[#ffb545] select-none"
               style={{ transition: ".3s" }}
             >
-              1
+              <AiOutlinePercentage className="text-[20px]" />
             </div>
             <div
               className="neomorphism  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
@@ -392,7 +394,7 @@ function App() {
               className="neomorphism  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px] rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
               style={{ transition: ".3s" }}
             >
-              1
+              <IoIosSwap className="text-[20px]" />
             </div>
             <div
               className="neomorphism  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px]  hover:bg-[#ffd18b] cursor-pointer select-none"
