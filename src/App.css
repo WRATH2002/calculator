@@ -1,38 +1,28 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.neomorphism {
+  -webkit-border-radius: 97px;
+  border-radius: 97px;
+  /* background: #eeeef8; */
+  -webkit-box-shadow: 7px 7px 20px #d9d9e2, -7px -7px 20px #ffffff;
+  box-shadow: 7px 7px 20px #d9d9e2, -7px -7px 20px #ffffff;
+}
+.neomorphismin {
+  /* -webkit-border-radius: 97px; */
+  /* border-radius: 97px; */
+  /* background: #eeeef8; */
+  -webkit-box-shadow: 7px 7px 20px #d9d9e2, -7px -7px 20px #ffffff;
+  box-shadow: 7px 7px 20px #d9d9e2, -7px -7px 20px #ffffff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: timer;
+  src: url(./assets/font/Onest-Thin.ttf);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+  font-family: timer2;
+  src: url(./assets/font/Recursive_VF_1.078.ttf);
 }
