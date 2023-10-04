@@ -21,6 +21,15 @@
   background: #eeeef8;
   box-shadow: inset 7px 7px 14px #dddde7, inset -7px -7px 14px #ffffff;
 }
+.darkneo {
+  /* border-radius: 150px; */
+  background: #262626;
+  box-shadow: 9px 9px 26px #161616, -9px -9px 26px #363636;
+}
+.darkneoinset {
+  background: #262626;
+  box-shadow: inset 9px 9px 26px #161616, inset -9px -9px 26px #363636;
+}
 
 @font-face {
   font-family: timer;
