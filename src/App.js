@@ -8,6 +8,8 @@ import { LiaPlusSolid } from "react-icons/lia";
 import { LiaEqualsSolid } from "react-icons/lia";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import { IoIosSwap } from "react-icons/io";
+import { MdWbSunny } from "react-icons/md";
+import { MdDarkMode } from "react-icons/md";
 import { AiOutlinePercentage } from "react-icons/ai";
 import { useEffect, useState } from "react";
 // import { LiaDivideSolid } from "react-icons/lia";
@@ -26,6 +28,7 @@ function App() {
 
   const [resultFocus, setResultFocus] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [dot, setDot] = useState(false);
 
   useEffect(() => {
     // fastresult();
@@ -76,14 +79,11 @@ function App() {
             className="font-bold bg-[#eeeef8] w-full h-[calc(100vh-60px)] lg:h-[100vh] md:h-[100vh] flex justify-center items-center"
             style={{ transition: ".4s" }}
           >
-            <button
-              onClick={() => {
-                setToggle(!toggle);
-                console.log(toggle);
-              }}
+            {/* <button
+              
             >
               clickme
-            </button>
+            </button> */}
             <div
               className="neomorphismin rounded-[30px] w-full lg:w-[340px] md:w-[340px] h-[calc(100vh-60px)] lg:h-[calc(100vh-100px)] md:h-[calc(100vh-100px)]"
               style={{ transition: ".4s" }}
@@ -259,6 +259,13 @@ function App() {
                         className="bg-transparent w-full h-[50px] outline-none font-[timer2] font-thin select-none  text-[17px] text-right text-[#939393]"
                         style={{ transition: ".4s" }}
                         value={screen}
+                        onKeyDown={(e) => {
+                          console.log(e);
+                          if (e.key === "Enter") {
+                            result();
+                            setResultFocus(true);
+                          }
+                        }}
                         onChange={(e) => {
                           if (
                             e.nativeEvent.inputType === "deleteContentForward"
@@ -340,7 +347,18 @@ function App() {
                                 // setScreen(screen + "/");
                                 // setSubScreen("");
                               }
-                            } else {
+                            } else if (
+                              e.nativeEvent.data === "0" ||
+                              e.nativeEvent.data === "1" ||
+                              e.nativeEvent.data === "2" ||
+                              e.nativeEvent.data === "3" ||
+                              e.nativeEvent.data === "4" ||
+                              e.nativeEvent.data === "5" ||
+                              e.nativeEvent.data === "6" ||
+                              e.nativeEvent.data === "7" ||
+                              e.nativeEvent.data === "8" ||
+                              e.nativeEvent.data === "9"
+                            ) {
                               setScreen(screen + e.nativeEvent.data);
                               setSubScreen(subScreen + e.nativeEvent.data);
                               setResultFocus(false);
@@ -359,8 +377,15 @@ function App() {
                       <input
                         className="bg-transparent w-full h-[60px] outline-none font-[timer2] font-thin select-none  text-[22px] text-right  "
                         style={{ transition: ".4s" }}
+                        // type="number"
                         value={screen}
-                        onKeyDown={(e) => console.log(e)}
+                        onKeyDown={(e) => {
+                          console.log(e);
+                          if (e.key === "Enter") {
+                            result();
+                            setResultFocus(true);
+                          }
+                        }}
                         onChange={(e) => {
                           console.log(e);
                           if (
@@ -443,7 +468,18 @@ function App() {
                                 // setScreen(screen + "/");
                                 // setSubScreen("");
                               }
-                            } else {
+                            } else if (
+                              e.nativeEvent.data === "0" ||
+                              e.nativeEvent.data === "1" ||
+                              e.nativeEvent.data === "2" ||
+                              e.nativeEvent.data === "3" ||
+                              e.nativeEvent.data === "4" ||
+                              e.nativeEvent.data === "5" ||
+                              e.nativeEvent.data === "6" ||
+                              e.nativeEvent.data === "7" ||
+                              e.nativeEvent.data === "8" ||
+                              e.nativeEvent.data === "9"
+                            ) {
                               setScreen(screen + e.nativeEvent.data);
                               setSubScreen(subScreen + e.nativeEvent.data);
                               setResultFocus(false);
@@ -483,6 +519,7 @@ function App() {
                       setResultScreen("");
                       setSubScreen("");
                       setResultFocus(false);
+                      setDot(false);
                     }}
                   >
                     C
@@ -504,13 +541,25 @@ function App() {
                           console.log(screen);
                           setOperator("");
                           setSubScreen(screen.slice(0, -1));
+                        } else if (screen[screen.length - 1] === ".") {
+                          console.log("found  ");
+                          setDot(false);
+                          setScreen(screen.slice(0, -1));
+                          setSubScreen(subScreen.slice(0, -1));
                         } else {
                           setScreen(screen.slice(0, -1));
                           setSubScreen(subScreen.slice(0, -1));
                         }
                       } else {
-                        setScreen(screen.slice(0, -1));
-                        setSubScreen(screen.slice(0, -1));
+                        if (screen[screen.length - 1] === ".") {
+                          console.log("found  ");
+                          setDot(false);
+                          setScreen(screen.slice(0, -1));
+                          setSubScreen(subScreen.slice(0, -1));
+                        } else {
+                          setScreen(screen.slice(0, -1));
+                          setSubScreen(screen.slice(0, -1));
+                        }
                       }
                     }}
                   >
@@ -699,8 +748,12 @@ function App() {
                   <div
                     className="neomorphism  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px] rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
+                    onClick={() => {
+                      setToggle(!toggle);
+                      console.log(toggle);
+                    }}
                   >
-                    <IoIosSwap className="text-[20px]" />
+                    <MdDarkMode className="text-[20px]" />
                   </div>
                   <div
                     className="neomorphism  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px]  hover:bg-[#ffd18b] cursor-pointer select-none"
@@ -717,9 +770,13 @@ function App() {
                     className="neomorphism  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px]  hover:bg-[#ffd18b] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
-                      setResultFocus(false);
-                      setScreen(screen + ".");
-                      setSubScreen(subScreen + ".");
+                      if (dot === true) {
+                      } else {
+                        setResultFocus(false);
+                        setScreen(screen + ".");
+                        setSubScreen(subScreen + ".");
+                        setDot(true);
+                      }
                     }}
                   >
                     .
@@ -746,7 +803,7 @@ function App() {
             className="font-bold bg-[#262626] text-white w-full h-[calc(100vh-60px)] lg:h-[100vh] md:h-[100vh] flex justify-center items-center"
             style={{ transition: ".4s" }}
           >
-            <button onClick={() => setToggle(!toggle)}>clickme</button>
+            {/* <button >clickme</button> */}
             <div
               className="darkneo rounded-[30px] w-full lg:w-[340px] md:w-[340px] h-[calc(100vh-60px)] lg:h-[calc(100vh-100px)] md:h-[calc(100vh-100px)]"
               style={{ transition: ".4s" }}
@@ -922,6 +979,13 @@ function App() {
                         className="bg-transparent w-full h-[50px] outline-none font-[timer2] font-thin select-none  text-[17px] text-right text-[#939393]"
                         style={{ transition: ".4s" }}
                         value={screen}
+                        onKeyDown={(e) => {
+                          console.log(e);
+                          if (e.key === "Enter") {
+                            result();
+                            setResultFocus(true);
+                          }
+                        }}
                         onChange={(e) => {
                           if (
                             e.nativeEvent.inputType === "deleteContentForward"
@@ -1003,7 +1067,18 @@ function App() {
                                 // setScreen(screen + "/");
                                 // setSubScreen("");
                               }
-                            } else {
+                            } else if (
+                              e.nativeEvent.data === "0" ||
+                              e.nativeEvent.data === "1" ||
+                              e.nativeEvent.data === "2" ||
+                              e.nativeEvent.data === "3" ||
+                              e.nativeEvent.data === "4" ||
+                              e.nativeEvent.data === "5" ||
+                              e.nativeEvent.data === "6" ||
+                              e.nativeEvent.data === "7" ||
+                              e.nativeEvent.data === "8" ||
+                              e.nativeEvent.data === "9"
+                            ) {
                               setScreen(screen + e.nativeEvent.data);
                               setSubScreen(subScreen + e.nativeEvent.data);
                               setResultFocus(false);
@@ -1023,7 +1098,13 @@ function App() {
                         className="bg-transparent w-full h-[60px] outline-none font-[timer2] font-thin select-none  text-[22px] text-right  "
                         style={{ transition: ".4s" }}
                         value={screen}
-                        onKeyDown={(e) => console.log(e)}
+                        onKeyDown={(e) => {
+                          console.log(e);
+                          if (e.key === "Enter") {
+                            result();
+                            setResultFocus(true);
+                          }
+                        }}
                         onChange={(e) => {
                           console.log(e);
                           if (
@@ -1106,7 +1187,18 @@ function App() {
                                 // setScreen(screen + "/");
                                 // setSubScreen("");
                               }
-                            } else {
+                            } else if (
+                              e.nativeEvent.data === "0" ||
+                              e.nativeEvent.data === "1" ||
+                              e.nativeEvent.data === "2" ||
+                              e.nativeEvent.data === "3" ||
+                              e.nativeEvent.data === "4" ||
+                              e.nativeEvent.data === "5" ||
+                              e.nativeEvent.data === "6" ||
+                              e.nativeEvent.data === "7" ||
+                              e.nativeEvent.data === "8" ||
+                              e.nativeEvent.data === "9"
+                            ) {
                               setScreen(screen + e.nativeEvent.data);
                               setSubScreen(subScreen + e.nativeEvent.data);
                               setResultFocus(false);
@@ -1138,7 +1230,7 @@ function App() {
               <div className="w-full   flex flex-col h-[478px] lg:h-[445px] md:h-[445px]  justify-center">
                 <div className="flex justify-evenly items-center my-[10px] font-[timer2] font-thin select-none ">
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center font-[timer] font-semibold  text-[22px] cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center font-[timer] font-semibold  text-[22px] cursor-pointer bg-[#424242] hover:bg-[#0f0f0f] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       setScreen("");
@@ -1146,12 +1238,13 @@ function App() {
                       setResultScreen("");
                       setSubScreen("");
                       setResultFocus(false);
+                      setDot(false);
                     }}
                   >
                     C
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#424242] hover:bg-[#0f0f0f] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       console.log(screen[screen.length - 1]);
@@ -1167,20 +1260,32 @@ function App() {
                           console.log(screen);
                           setOperator("");
                           setSubScreen(screen.slice(0, -1));
+                        } else if (screen[screen.length - 1] === ".") {
+                          console.log("found  ");
+                          setDot(false);
+                          setScreen(screen.slice(0, -1));
+                          setSubScreen(subScreen.slice(0, -1));
                         } else {
                           setScreen(screen.slice(0, -1));
                           setSubScreen(subScreen.slice(0, -1));
                         }
                       } else {
-                        setScreen(screen.slice(0, -1));
-                        setSubScreen(screen.slice(0, -1));
+                        if (screen[screen.length - 1] === ".") {
+                          console.log("found  ");
+                          setDot(false);
+                          setScreen(screen.slice(0, -1));
+                          setSubScreen(subScreen.slice(0, -1));
+                        } else {
+                          setScreen(screen.slice(0, -1));
+                          setSubScreen(screen.slice(0, -1));
+                        }
                       }
                     }}
                   >
                     <RiDeleteBack2Line className="text-[20px]" />
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer bg-[#ffb545] select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#0f0f0f] cursor-pointer bg-[#424242] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       if (operator.length >= 1) {
@@ -1193,7 +1298,7 @@ function App() {
                     <AiOutlinePercentage className="text-[20px]" />
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#424242] hover:bg-[#0f0f0f] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       if (operator.length >= 1) {
@@ -1210,7 +1315,7 @@ function App() {
                 </div>
                 <div className="flex justify-evenly items-center my-[10px] font-[timer2] font-thin">
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       setResultFocus(false);
@@ -1221,7 +1326,7 @@ function App() {
                     7
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       setResultFocus(false);
@@ -1232,7 +1337,7 @@ function App() {
                     8
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       setResultFocus(false);
@@ -1243,7 +1348,7 @@ function App() {
                     9
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#424242] hover:bg-[#0f0f0f] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       if (operator.length >= 1) {
@@ -1260,7 +1365,7 @@ function App() {
                 </div>
                 <div className="flex justify-evenly items-center my-[10px] font-[timer2] font-thin">
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       setResultFocus(false);
@@ -1271,7 +1376,7 @@ function App() {
                     4
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       setResultFocus(false);
@@ -1282,7 +1387,7 @@ function App() {
                     5
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       setResultFocus(false);
@@ -1293,7 +1398,7 @@ function App() {
                     6
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#424242] hover:bg-[#0f0f0f] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       if (operator.length >= 1) {
@@ -1310,7 +1415,7 @@ function App() {
                 </div>
                 <div className="flex justify-evenly items-center my-[10px] font-[timer2] font-thin">
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       setResultFocus(false);
@@ -1321,7 +1426,7 @@ function App() {
                     1
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       setResultFocus(false);
@@ -1332,7 +1437,7 @@ function App() {
                     2
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px] hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       setResultFocus(false);
@@ -1343,7 +1448,7 @@ function App() {
                     3
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#424242] hover:bg-[#0f0f0f] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       if (operator.length >= 1) {
@@ -1360,13 +1465,14 @@ function App() {
                 </div>
                 <div className="flex justify-evenly items-center my-[10px] font-[timer2] font-thin">
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px] rounded-full flex justify-center items-center text-[22px] hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px] rounded-full flex justify-center items-center text-[22px] hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
+                    onClick={() => setToggle(!toggle)}
                   >
-                    <IoIosSwap className="text-[20px]" />
+                    <MdWbSunny className="text-[20px]" />
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px]  hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px]  hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       setResultFocus(false);
@@ -1377,18 +1483,22 @@ function App() {
                     0
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px]  hover:bg-[#ffd18b] cursor-pointer select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center text-[22px]  hover:bg-[#0f0f0f] cursor-pointer select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
-                      setResultFocus(false);
-                      setScreen(screen + ".");
-                      setSubScreen(subScreen + ".");
+                      if (dot === true) {
+                      } else {
+                        setResultFocus(false);
+                        setScreen(screen + ".");
+                        setSubScreen(subScreen + ".");
+                        setDot(true);
+                      }
                     }}
                   >
                     .
                   </div>
                   <div
-                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
+                    className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#424242] hover:bg-[#0f0f0f] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       result();
