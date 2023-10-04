@@ -85,7 +85,7 @@ function App() {
               clickme
             </button> */}
             <div
-              className="neomorphismin rounded-[30px] w-full lg:w-[340px] md:w-[340px] h-[calc(100vh-60px)] lg:h-[calc(100vh-100px)] md:h-[calc(100vh-100px)]"
+              className="neomorphismin  rounded-0 lg:rounded-[30px] md:rounded-[30px] w-full lg:w-[340px] md:w-[340px] h-[calc(100vh-60px)] lg:h-[calc(100vh-100px)] md:h-[calc(100vh-100px)]"
               style={{ transition: ".4s" }}
             >
               <div className=" h-[calc(100%-478px)] lg:h-[calc(100%-445px)] md:h-[calc(100%-445px)] w-full flex justify-center items-center px-[24px] lg:px-[16px] md:px-[16px] ">
@@ -805,7 +805,7 @@ function App() {
           >
             {/* <button >clickme</button> */}
             <div
-              className="darkneo rounded-[30px] w-full lg:w-[340px] md:w-[340px] h-[calc(100vh-60px)] lg:h-[calc(100vh-100px)] md:h-[calc(100vh-100px)]"
+              className="darkneo rounded-0 lg:rounded-[30px] md:rounded-[30px] w-full lg:w-[340px] md:w-[340px] h-[calc(100vh-60px)] lg:h-[calc(100vh-100px)] md:h-[calc(100vh-100px)]"
               style={{ transition: ".4s" }}
             >
               <div className=" h-[calc(100%-478px)] lg:h-[calc(100%-445px)] md:h-[calc(100%-445px)] w-full flex justify-center items-center px-[24px] lg:px-[16px] md:px-[16px] ">
