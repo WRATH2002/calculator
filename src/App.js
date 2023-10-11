@@ -8,6 +8,7 @@ import { LiaPlusSolid } from "react-icons/lia";
 import { LiaEqualsSolid } from "react-icons/lia";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import { IoIosSwap } from "react-icons/io";
+import { LiaInfinitySolid } from "react-icons/lia";
 import { MdWbSunny } from "react-icons/md";
 import { MdDarkMode } from "react-icons/md";
 import { AiOutlinePercentage } from "react-icons/ai";
@@ -17,7 +18,8 @@ import { useEffect, useState } from "react";
 function App() {
   const [fastResult, setFastResult] = useState("");
 
-  const [screen, setScreen] = useState("");
+  const [isOperator, setIsoperator] = useState(false);
+
   const [subScreen, setSubScreen] = useState("");
 
   const [numberOne, setNumberOne] = useState("");
@@ -27,8 +29,12 @@ function App() {
   const [resultScreen, setResultScreen] = useState("");
 
   const [resultFocus, setResultFocus] = useState(false);
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(true);
   const [dot, setDot] = useState(false);
+
+  const [isOperatorBefore, setIsoperatorBefore] = useState(false);
+  const [operatorCount, setOperatorCount] = useState(0);
+  const [screen, setScreen] = useState("");
 
   useEffect(() => {
     // fastresult();
@@ -70,6 +76,17 @@ function App() {
   //   var num1 = subScreen;
   //   fastResult = fastresult;
   // }
+
+  function checkInputScreenStart() {
+    if (
+      screen[0] === "/" ||
+      screen[0] === "*" ||
+      screen[0] === "+" ||
+      screen[0] === "-"
+    ) {
+      setScreen("0");
+    }
+  }
 
   return (
     <>
@@ -114,64 +131,12 @@ function App() {
                           className="bg-transparent w-auto min-w-0 max-w-[246px] h-full flex justify-end items-start overflow-hidden outline-none font-[timer2] font-thin select-none  text-[17px] text-right text-[#939393]"
                           style={{ transition: ".4s" }}
                         >
-                          {operator.length === 0 ? (
-                            <>{subScreen}</>
+                          {screen === "" ? (
+                            <>{eval(screen)}</>
+                          ) : isOperator === true ? (
+                            <>{eval(screen.slice(0, -1))}</>
                           ) : (
-                            <>
-                              {operator === "1" ? (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) / parseFloat("1")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) /
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              ) : operator === "2" ? (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) * parseFloat("1")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) *
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              ) : operator === "3" ? (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) - parseFloat("0")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) -
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              ) : (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) + parseFloat("0")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) +
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              )}
-                            </>
+                            <>{eval(screen)}</>
                           )}
                         </span>
                       </div>
@@ -190,64 +155,12 @@ function App() {
                           className="bg-transparent w-auto min-w-0 max-w-[246px] h-full flex justify-end items-start overflow-hidden outline-none font-[timer2] font-thin select-none  text-[22px] text-right"
                           style={{ transition: ".4s" }}
                         >
-                          {operator.length === 0 ? (
-                            <>{subScreen}</>
+                          {screen === "" ? (
+                            <>{eval(screen)}</>
+                          ) : isOperator === true ? (
+                            <>{eval(screen.slice(0, -1))}</>
                           ) : (
-                            <>
-                              {operator === "1" ? (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) / parseFloat("1")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) /
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              ) : operator === "2" ? (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) * parseFloat("1")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) *
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              ) : operator === "3" ? (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) - parseFloat("0")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) -
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              ) : (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) + parseFloat("0")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) +
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              )}
-                            </>
+                            <>{eval(screen)}</>
                           )}
                         </span>
                       </div>
@@ -387,107 +300,61 @@ function App() {
                           }
                         }}
                         onChange={(e) => {
-                          console.log(e);
+                          // console.log(typeof e.nativeEvent.data);
                           if (
-                            e.nativeEvent.inputType === "deleteContentForward"
+                            e.nativeEvent.data === "+" ||
+                            e.nativeEvent.data === "-" ||
+                            e.nativeEvent.data === "*" ||
+                            e.nativeEvent.data === "/"
                           ) {
-                            if (operator.length != 0) {
-                              if (
-                                screen[screen.length - 1] === "/" ||
-                                screen[screen.length - 1] === "X" ||
-                                screen[screen.length - 1] === "+" ||
-                                screen[screen.length - 1] === "-"
-                              ) {
-                                console.log("operator");
-                                setScreen(screen.slice(0, -1));
-                                console.log(screen);
-                                setOperator("");
-                                setSubScreen(screen.slice(0, -1));
-                              } else {
-                                setScreen(screen.slice(0, -1));
-                                setSubScreen(subScreen.slice(0, -1));
+                            if (screen === "") {
+                              if (e.nativeEvent.data === "+") {
+                                setScreen(screen + "0+");
+                              } else if (e.nativeEvent.data === "-") {
+                                setScreen(screen + "0-");
+                              } else if (e.nativeEvent.data === "*") {
+                                setScreen(screen + "0*");
+                              } else if (e.nativeEvent.data === "/") {
+                                setScreen(screen + "0/");
                               }
+                              setIsoperator(true);
+                            } else if (isOperator === true) {
+                              if (e.nativeEvent.data === "+") {
+                                setScreen(screen.slice(0, -1) + "+");
+                              } else if (e.nativeEvent.data === "-") {
+                                setScreen(screen.slice(0, -1) + "-");
+                              } else if (e.nativeEvent.data === "*") {
+                                setScreen(screen.slice(0, -1) + "*");
+                              } else if (e.nativeEvent.data === "/") {
+                                setScreen(screen.slice(0, -1) + "/");
+                              }
+                              setIsoperator(true);
                             } else {
-                              setScreen(screen.slice(0, -1));
-                              setSubScreen(screen.slice(0, -1));
                             }
                           } else if (
-                            e.nativeEvent.inputType === "deleteContentBackward"
+                            e.target.value === "0" ||
+                            e.target.value === "1" ||
+                            e.target.value === "2" ||
+                            e.target.value === "3" ||
+                            e.target.value === "4" ||
+                            e.target.value === "5" ||
+                            e.target.value === "6" ||
+                            e.target.value === "7" ||
+                            e.target.value === "8" ||
+                            e.target.value === "9"
                           ) {
-                            if (operator.length != 0) {
-                              if (
-                                screen[screen.length - 1] === "/" ||
-                                screen[screen.length - 1] === "X" ||
-                                screen[screen.length - 1] === "+" ||
-                                screen[screen.length - 1] === "-"
-                              ) {
-                                console.log("operator");
-                                setScreen(screen.slice(0, -1));
-                                console.log(screen);
-                                setOperator("");
-                                setSubScreen(screen.slice(0, -1));
-                              } else {
-                                setScreen(screen.slice(0, -1));
-                                setSubScreen(subScreen.slice(0, -1));
-                              }
-                            } else {
-                              setScreen(screen.slice(0, -1));
-                              setSubScreen(screen.slice(0, -1));
-                            }
-                          } else {
-                            if (
-                              e.nativeEvent.data === "+" ||
-                              e.nativeEvent.data === "-" ||
-                              e.nativeEvent.data === "*" ||
-                              e.nativeEvent.data === "/"
-                            ) {
-                              if (operator.length >= 1) {
-                              } else {
-                                if (e.nativeEvent.data === "/") {
-                                  setOperator("1");
-                                  setNumberOne(subScreen);
-                                  setScreen(screen + "/");
-                                  setSubScreen("");
-                                } else if (e.nativeEvent.data === "*") {
-                                  setOperator("2");
-                                  setNumberOne(subScreen);
-                                  setScreen(screen + "X");
-                                  setSubScreen("");
-                                } else if (e.nativeEvent.data === "-") {
-                                  setOperator("3");
-                                  setNumberOne(subScreen);
-                                  setScreen(screen + "-");
-                                  setSubScreen("");
-                                } else if (e.nativeEvent.data === "+") {
-                                  setOperator("4");
-                                  setNumberOne(subScreen);
-                                  setScreen(screen + "+");
-                                  setSubScreen("");
-                                }
-                                // setNumberOne(subScreen);
-                                // setScreen(screen + "/");
-                                // setSubScreen("");
-                              }
-                            } else if (
-                              e.nativeEvent.data === "0" ||
-                              e.nativeEvent.data === "1" ||
-                              e.nativeEvent.data === "2" ||
-                              e.nativeEvent.data === "3" ||
-                              e.nativeEvent.data === "4" ||
-                              e.nativeEvent.data === "5" ||
-                              e.nativeEvent.data === "6" ||
-                              e.nativeEvent.data === "7" ||
-                              e.nativeEvent.data === "8" ||
-                              e.nativeEvent.data === "9"
-                            ) {
-                              setScreen(screen + e.nativeEvent.data);
-                              setSubScreen(subScreen + e.nativeEvent.data);
-                              setResultFocus(false);
-                            }
-                            if (operator.length === 1) {
-                              result();
-                            }
                           }
+                          if (screen === "") {
+                            setScreen(screen + "0+");
+                            setIsoperator(true);
+                          } else if (isOperator === true) {
+                            setScreen(screen.slice(0, -1) + "+");
+                            setIsoperator(true);
+                          } else {
+                            setScreen(screen + "+");
+                            setIsoperator(true);
+                          }
+                          setScreen(e.target.value);
                         }}
                       ></input>
                     </>
@@ -529,36 +396,23 @@ function App() {
                     style={{ transition: ".3s" }}
                     onClick={() => {
                       console.log(screen[screen.length - 1]);
-                      if (operator.length != 0) {
-                        if (
-                          screen[screen.length - 1] === "/" ||
-                          screen[screen.length - 1] === "X" ||
-                          screen[screen.length - 1] === "+" ||
-                          screen[screen.length - 1] === "-"
-                        ) {
-                          console.log("operator");
-                          setScreen(screen.slice(0, -1));
-                          console.log(screen);
-                          setOperator("");
-                          setSubScreen(screen.slice(0, -1));
-                        } else if (screen[screen.length - 1] === ".") {
-                          console.log("found  ");
-                          setDot(false);
-                          setScreen(screen.slice(0, -1));
-                          setSubScreen(subScreen.slice(0, -1));
-                        } else {
-                          setScreen(screen.slice(0, -1));
-                          setSubScreen(subScreen.slice(0, -1));
-                        }
+                      if (
+                        screen[screen.length - 2] === "+" ||
+                        screen[screen.length - 2] === "-" ||
+                        screen[screen.length - 2] === "*" ||
+                        screen[screen.length - 2] === "/"
+                      ) {
+                        setIsoperator(true);
+                        setScreen(screen.slice(0, -1));
                       } else {
-                        if (screen[screen.length - 1] === ".") {
-                          console.log("found  ");
-                          setDot(false);
+                        if (screen.length === 1) {
+                          setIsoperator(false);
+                          setSubScreen("");
                           setScreen(screen.slice(0, -1));
-                          setSubScreen(subScreen.slice(0, -1));
+                          setOperator("");
                         } else {
+                          setIsoperator(false);
                           setScreen(screen.slice(0, -1));
-                          setSubScreen(screen.slice(0, -1));
                         }
                       }
                     }}
@@ -582,12 +436,18 @@ function App() {
                     className="neomorphism  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
-                      if (operator.length >= 1) {
+                      if (screen === "") {
+                        setScreen(screen + "0/");
+                        setIsoperator(true);
+                        setDot(false);
+                      } else if (isOperator === true) {
+                        setScreen(screen.slice(0, -1) + "/");
+                        setIsoperator(true);
+                        setDot(false);
                       } else {
-                        setOperator("1");
-                        setNumberOne(subScreen);
                         setScreen(screen + "/");
-                        setSubScreen("");
+                        setIsoperator(true);
+                        setDot(false);
                       }
                     }}
                   >
@@ -602,6 +462,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "7");
                       setSubScreen(subScreen + "7");
+                      setIsoperator(false);
                     }}
                   >
                     7
@@ -613,6 +474,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "8");
                       setSubScreen(subScreen + "8");
+                      setIsoperator(false);
                     }}
                   >
                     8
@@ -624,6 +486,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "9");
                       setSubScreen(subScreen + "9");
+                      setIsoperator(false);
                     }}
                   >
                     9
@@ -632,12 +495,18 @@ function App() {
                     className="neomorphism  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
-                      if (operator.length >= 1) {
+                      if (screen === "") {
+                        setScreen(screen + "0*");
+                        setIsoperator(true);
+                        setDot(false);
+                      } else if (isOperator === true) {
+                        setScreen(screen.slice(0, -1) + "*");
+                        setIsoperator(true);
+                        setDot(false);
                       } else {
-                        setOperator("2");
-                        setNumberOne(subScreen);
-                        setScreen(screen + "X");
-                        setSubScreen("");
+                        setScreen(screen + "*");
+                        setIsoperator(true);
+                        setDot(false);
                       }
                     }}
                   >
@@ -652,6 +521,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "4");
                       setSubScreen(subScreen + "4");
+                      setIsoperator(false);
                     }}
                   >
                     4
@@ -663,6 +533,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "5");
                       setSubScreen(subScreen + "5");
+                      setIsoperator(false);
                     }}
                   >
                     5
@@ -674,6 +545,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "6");
                       setSubScreen(subScreen + "6");
+                      setIsoperator(false);
                     }}
                   >
                     6
@@ -682,12 +554,18 @@ function App() {
                     className="neomorphism  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
-                      if (operator.length >= 1) {
+                      if (screen === "") {
+                        setScreen(screen + "0-");
+                        setIsoperator(true);
+                        setDot(false);
+                      } else if (isOperator === true) {
+                        setScreen(screen.slice(0, -1) + "-");
+                        setIsoperator(true);
+                        setDot(false);
                       } else {
-                        setOperator("3");
-                        setNumberOne(subScreen);
                         setScreen(screen + "-");
-                        setSubScreen("");
+                        setIsoperator(true);
+                        setDot(false);
                       }
                     }}
                   >
@@ -702,6 +580,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "1");
                       setSubScreen(subScreen + "1");
+                      setIsoperator(false);
                     }}
                   >
                     1
@@ -713,6 +592,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "2");
                       setSubScreen(subScreen + "2");
+                      setIsoperator(false);
                     }}
                   >
                     2
@@ -724,6 +604,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "3");
                       setSubScreen(subScreen + "3");
+                      setIsoperator(false);
                     }}
                   >
                     3
@@ -732,12 +613,18 @@ function App() {
                     className="neomorphism  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#ffb545] hover:bg-[#ffd18b] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
-                      if (operator.length >= 1) {
+                      if (screen === "") {
+                        setScreen(screen + "0+");
+                        setIsoperator(true);
+                        setDot(false);
+                      } else if (isOperator === true) {
+                        setScreen(screen.slice(0, -1) + "+");
+                        setIsoperator(true);
+                        setDot(false);
                       } else {
-                        setOperator("4");
-                        setNumberOne(subScreen);
                         setScreen(screen + "+");
-                        setSubScreen("");
+                        setIsoperator(true);
+                        setDot(false);
                       }
                     }}
                   >
@@ -762,6 +649,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "0");
                       setSubScreen(subScreen + "0");
+                      setIsoperator(false);
                     }}
                   >
                     0
@@ -775,6 +663,7 @@ function App() {
                         setResultFocus(false);
                         setScreen(screen + ".");
                         setSubScreen(subScreen + ".");
+                        setIsoperator(false);
                         setDot(true);
                       }
                     }}
@@ -834,62 +723,18 @@ function App() {
                           className="bg-transparent w-auto min-w-0 max-w-[246px] h-full flex justify-end items-start overflow-hidden outline-none font-[timer2] font-thin select-none  text-[17px] text-right text-[#939393]"
                           style={{ transition: ".4s" }}
                         >
-                          {operator.length === 0 ? (
-                            <>{subScreen}</>
+                          {screen === "" ? (
+                            <>{eval(screen)}</>
+                          ) : isOperatorBefore === true ? (
+                            <>{eval(screen.slice(0, -1))}</>
                           ) : (
                             <>
-                              {operator === "1" ? (
+                              {eval(screen) === Infinity ? (
                                 <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) / parseFloat("1")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) /
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              ) : operator === "2" ? (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) * parseFloat("1")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) *
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              ) : operator === "3" ? (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) - parseFloat("0")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) -
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
+                                  <LiaInfinitySolid />
                                 </>
                               ) : (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) + parseFloat("0")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) +
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
+                                <>{eval(screen)}</>
                               )}
                             </>
                           )}
@@ -910,62 +755,18 @@ function App() {
                           className="bg-transparent w-auto min-w-0 max-w-[246px] h-full flex justify-end items-start overflow-hidden outline-none font-[timer2] font-thin select-none  text-[22px] text-right"
                           style={{ transition: ".4s" }}
                         >
-                          {operator.length === 0 ? (
-                            <>{subScreen}</>
+                          {screen === "" ? (
+                            <>{eval(screen)}</>
+                          ) : isOperatorBefore === true ? (
+                            <>{eval(screen.slice(0, -1))}</>
                           ) : (
                             <>
-                              {operator === "1" ? (
+                              {eval(screen) === Infinity ? (
                                 <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) / parseFloat("1")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) /
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              ) : operator === "2" ? (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) * parseFloat("1")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) *
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
-                              ) : operator === "3" ? (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) - parseFloat("0")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) -
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
+                                  <LiaInfinitySolid />
                                 </>
                               ) : (
-                                <>
-                                  {subScreen.length === 0 ? (
-                                    <>
-                                      {parseFloat(numberOne) + parseFloat("0")}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {parseFloat(numberOne) +
-                                        parseFloat(subScreen)}
-                                    </>
-                                  )}
-                                </>
+                                <>{eval(screen)}</>
                               )}
                             </>
                           )}
@@ -993,7 +794,7 @@ function App() {
                             if (operator.length != 0) {
                               if (
                                 screen[screen.length - 1] === "/" ||
-                                screen[screen.length - 1] === "X" ||
+                                screen[screen.length - 1] === "*" ||
                                 screen[screen.length - 1] === "+" ||
                                 screen[screen.length - 1] === "-"
                               ) {
@@ -1010,30 +811,32 @@ function App() {
                               setScreen(screen.slice(0, -1));
                               setSubScreen(screen.slice(0, -1));
                             }
-                          } else if (
-                            e.nativeEvent.inputType === "deleteContentBackward"
-                          ) {
-                            if (operator.length != 0) {
-                              if (
-                                screen[screen.length - 1] === "/" ||
-                                screen[screen.length - 1] === "X" ||
-                                screen[screen.length - 1] === "+" ||
-                                screen[screen.length - 1] === "-"
-                              ) {
-                                console.log("operator");
-                                setScreen(screen.slice(0, -1));
-                                console.log(screen);
-                                setOperator("");
-                                setSubScreen(screen.slice(0, -1));
-                              } else {
-                                setScreen(screen.slice(0, -1));
-                                setSubScreen(subScreen.slice(0, -1));
-                              }
-                            } else {
-                              setScreen(screen.slice(0, -1));
-                              setSubScreen(screen.slice(0, -1));
-                            }
-                          } else {
+                          }
+                          //  else if (
+                          //   e.nativeEvent.inputType === "deleteContentBackward"
+                          // ) {
+                          //   if (operatorCount != 0) {
+                          //     if (
+                          //       screen[screen.length - 2] === "/" ||
+                          //       screen[screen.length - 2] === "*" ||
+                          //       screen[screen.length - 2] === "+" ||
+                          //       screen[screen.length - 2] === "-"
+                          //     ) {
+                          //       // console.log("operator");
+                          //       setScreen(screen.slice(0, -1));
+                          //       // console.log(screen);
+                          //       // setOperator("");
+                          //       // setSubScreen(screen.slice(0, -1));
+                          //     } else {
+                          //       setScreen(screen.slice(0, -1));
+                          //       // setSubScreen(subScreen.slice(0, -1));
+                          //     }
+                          //   } else {
+                          //     setScreen(screen.slice(0, -1));
+                          //     // setSubScreen(screen.slice(0, -1));
+                          //   }
+                          // }
+                          else {
                             if (
                               e.nativeEvent.data === "+" ||
                               e.nativeEvent.data === "-" ||
@@ -1108,104 +911,97 @@ function App() {
                         onChange={(e) => {
                           console.log(e);
                           if (
-                            e.nativeEvent.inputType === "deleteContentForward"
+                            e.nativeEvent.data === "+" ||
+                            e.nativeEvent.data === "-" ||
+                            e.nativeEvent.data === "*" ||
+                            e.nativeEvent.data === "/"
                           ) {
-                            if (operator.length != 0) {
-                              if (
-                                screen[screen.length - 1] === "/" ||
-                                screen[screen.length - 1] === "X" ||
-                                screen[screen.length - 1] === "+" ||
-                                screen[screen.length - 1] === "-"
-                              ) {
-                                console.log("operator");
-                                setScreen(screen.slice(0, -1));
-                                console.log(screen);
-                                setOperator("");
-                                setSubScreen(screen.slice(0, -1));
-                              } else {
-                                setScreen(screen.slice(0, -1));
-                                setSubScreen(subScreen.slice(0, -1));
+                            if (isOperatorBefore === true) {
+                              // Do Nothing for now
+                              if (e.nativeEvent.data === "/") {
+                                setScreen(
+                                  screen.slice(0, -1) + e.nativeEvent.data
+                                );
+                              }
+                              if (e.nativeEvent.data === "*") {
+                                setScreen(
+                                  screen.slice(0, -1) + e.nativeEvent.data
+                                );
+                              }
+                              if (e.nativeEvent.data === "-") {
+                                setScreen(
+                                  screen.slice(0, -1) + e.nativeEvent.data
+                                );
+                              }
+                              if (e.nativeEvent.data === "+") {
+                                setScreen(
+                                  screen.slice(0, -1) + e.nativeEvent.data
+                                );
                               }
                             } else {
-                              setScreen(screen.slice(0, -1));
-                              setSubScreen(screen.slice(0, -1));
+                              if (e.nativeEvent.data === "/") {
+                                // setOperator("1");
+                                setOperatorCount(parseInt(operatorCount) + 1);
+                                setIsoperatorBefore(true);
+                                setScreen(screen + e.nativeEvent.data);
+                              } else if (e.nativeEvent.data === "*") {
+                                setOperatorCount(parseInt(operatorCount) + 1);
+                                setIsoperatorBefore(true);
+                                setScreen(screen + e.nativeEvent.data);
+                              } else if (e.nativeEvent.data === "-") {
+                                setOperatorCount(parseInt(operatorCount) + 1);
+                                setIsoperatorBefore(true);
+                                setScreen(screen + e.nativeEvent.data);
+                              } else if (e.nativeEvent.data === "+") {
+                                setOperatorCount(parseInt(operatorCount) + 1);
+                                setIsoperatorBefore(true);
+                                setScreen(screen + e.nativeEvent.data);
+                              }
                             }
+                          } else if (
+                            e.nativeEvent.data === "0" ||
+                            e.nativeEvent.data === "1" ||
+                            e.nativeEvent.data === "2" ||
+                            e.nativeEvent.data === "3" ||
+                            e.nativeEvent.data === "4" ||
+                            e.nativeEvent.data === "5" ||
+                            e.nativeEvent.data === "6" ||
+                            e.nativeEvent.data === "7" ||
+                            e.nativeEvent.data === "8" ||
+                            e.nativeEvent.data === "9" ||
+                            e.nativeEvent.data === "."
+                          ) {
+                            setScreen(screen + e.nativeEvent.data);
+                            setIsoperatorBefore(false);
+                            // setSubScreen(subScreen + e.nativeEvent.data);
+                            setResultFocus(false);
                           } else if (
                             e.nativeEvent.inputType === "deleteContentBackward"
                           ) {
-                            if (operator.length != 0) {
-                              if (
-                                screen[screen.length - 1] === "/" ||
-                                screen[screen.length - 1] === "X" ||
-                                screen[screen.length - 1] === "+" ||
-                                screen[screen.length - 1] === "-"
-                              ) {
-                                console.log("operator");
-                                setScreen(screen.slice(0, -1));
-                                console.log(screen);
-                                setOperator("");
-                                setSubScreen(screen.slice(0, -1));
-                              } else {
-                                setScreen(screen.slice(0, -1));
-                                setSubScreen(subScreen.slice(0, -1));
-                              }
-                            } else {
-                              setScreen(screen.slice(0, -1));
-                              setSubScreen(screen.slice(0, -1));
-                            }
-                          } else {
                             if (
-                              e.nativeEvent.data === "+" ||
-                              e.nativeEvent.data === "-" ||
-                              e.nativeEvent.data === "*" ||
-                              e.nativeEvent.data === "/"
+                              screen[screen.length - 2] === "/" ||
+                              screen[screen.length - 2] === "*" ||
+                              screen[screen.length - 2] === "+" ||
+                              screen[screen.length - 2] === "-"
                             ) {
-                              if (operator.length >= 1) {
-                              } else {
-                                if (e.nativeEvent.data === "/") {
-                                  setOperator("1");
-                                  setNumberOne(subScreen);
-                                  setScreen(screen + "/");
-                                  setSubScreen("");
-                                } else if (e.nativeEvent.data === "*") {
-                                  setOperator("2");
-                                  setNumberOne(subScreen);
-                                  setScreen(screen + "X");
-                                  setSubScreen("");
-                                } else if (e.nativeEvent.data === "-") {
-                                  setOperator("3");
-                                  setNumberOne(subScreen);
-                                  setScreen(screen + "-");
-                                  setSubScreen("");
-                                } else if (e.nativeEvent.data === "+") {
-                                  setOperator("4");
-                                  setNumberOne(subScreen);
-                                  setScreen(screen + "+");
-                                  setSubScreen("");
-                                }
-                                // setNumberOne(subScreen);
-                                // setScreen(screen + "/");
-                                // setSubScreen("");
-                              }
-                            } else if (
-                              e.nativeEvent.data === "0" ||
-                              e.nativeEvent.data === "1" ||
-                              e.nativeEvent.data === "2" ||
-                              e.nativeEvent.data === "3" ||
-                              e.nativeEvent.data === "4" ||
-                              e.nativeEvent.data === "5" ||
-                              e.nativeEvent.data === "6" ||
-                              e.nativeEvent.data === "7" ||
-                              e.nativeEvent.data === "8" ||
-                              e.nativeEvent.data === "9"
-                            ) {
-                              setScreen(screen + e.nativeEvent.data);
-                              setSubScreen(subScreen + e.nativeEvent.data);
-                              setResultFocus(false);
+                              setIsoperatorBefore(true);
+                              setScreen(e.target.value);
+                              // checkInputScreenStart();
                             }
-                            if (operator.length === 1) {
-                              result();
+                            // else if (
+                            //   screen[0] === "/" ||
+                            //   screen[0] === "*" ||
+                            //   screen[0] === "+" ||
+                            //   screen[0] === "-"
+                            // ) {
+                            //   setScreen("0");
+                            // }
+                            else {
+                              setIsoperatorBefore(false);
+                              setScreen(e.target.value);
                             }
+                            // setScreen(e.target.value);
+                            checkInputScreenStart();
                           }
                         }}
                       ></input>
@@ -1301,12 +1097,15 @@ function App() {
                     className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#424242] hover:bg-[#0f0f0f] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
-                      if (operator.length >= 1) {
+                      if (screen === "") {
+                        setScreen(screen + "0/");
+                        setIsoperator(true);
+                      } else if (isOperator === true) {
+                        setScreen(screen.slice(0, -1) + "/");
+                        setIsoperator(true);
                       } else {
-                        setOperator("1");
-                        setNumberOne(subScreen);
                         setScreen(screen + "/");
-                        setSubScreen("");
+                        setIsoperator(true);
                       }
                     }}
                   >
@@ -1321,6 +1120,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "7");
                       setSubScreen(subScreen + "7");
+                      setIsoperator(false);
                     }}
                   >
                     7
@@ -1332,6 +1132,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "8");
                       setSubScreen(subScreen + "8");
+                      setIsoperator(false);
                     }}
                   >
                     8
@@ -1343,6 +1144,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "9");
                       setSubScreen(subScreen + "9");
+                      setIsoperator(false);
                     }}
                   >
                     9
@@ -1351,12 +1153,15 @@ function App() {
                     className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#424242] hover:bg-[#0f0f0f] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
-                      if (operator.length >= 1) {
+                      if (screen === "") {
+                        setScreen(screen + "0*");
+                        setIsoperator(true);
+                      } else if (isOperator === true) {
+                        setScreen(screen.slice(0, -1) + "*");
+                        setIsoperator(true);
                       } else {
-                        setOperator("2");
-                        setNumberOne(subScreen);
-                        setScreen(screen + "X");
-                        setSubScreen("");
+                        setScreen(screen + "*");
+                        setIsoperator(true);
                       }
                     }}
                   >
@@ -1371,6 +1176,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "4");
                       setSubScreen(subScreen + "4");
+                      setIsoperator(false);
                     }}
                   >
                     4
@@ -1382,6 +1188,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "5");
                       setSubScreen(subScreen + "5");
+                      setIsoperator(false);
                     }}
                   >
                     5
@@ -1393,6 +1200,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "6");
                       setSubScreen(subScreen + "6");
+                      setIsoperator(false);
                     }}
                   >
                     6
@@ -1401,12 +1209,15 @@ function App() {
                     className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#424242] hover:bg-[#0f0f0f] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
-                      if (operator.length >= 1) {
+                      if (screen === "") {
+                        setScreen(screen + "0-");
+                        setIsoperator(true);
+                      } else if (isOperator === true) {
+                        setScreen(screen.slice(0, -1) + "-");
+                        setIsoperator(true);
                       } else {
-                        setOperator("3");
-                        setNumberOne(subScreen);
                         setScreen(screen + "-");
-                        setSubScreen("");
+                        setIsoperator(true);
                       }
                     }}
                   >
@@ -1421,6 +1232,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "1");
                       setSubScreen(subScreen + "1");
+                      setIsoperator(false);
                     }}
                   >
                     1
@@ -1432,6 +1244,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "2");
                       setSubScreen(subScreen + "2");
+                      setIsoperator(false);
                     }}
                   >
                     2
@@ -1443,6 +1256,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "3");
                       setSubScreen(subScreen + "3");
+                      setIsoperator(false);
                     }}
                   >
                     3
@@ -1451,12 +1265,15 @@ function App() {
                     className="darkneo  w-[70px] lg:w-[65px] md:w-[65px] h-[70px] lg:h-[65px] md:h-[65px]  rounded-full flex justify-center items-center cursor-pointer bg-[#424242] hover:bg-[#0f0f0f] select-none"
                     style={{ transition: ".3s" }}
                     onClick={() => {
-                      if (operator.length >= 1) {
+                      if (screen === "") {
+                        setScreen(screen + "0+");
+                        setIsoperator(true);
+                      } else if (isOperator === true) {
+                        setScreen(screen.slice(0, -1) + "+");
+                        setIsoperator(true);
                       } else {
-                        setOperator("4");
-                        setNumberOne(subScreen);
                         setScreen(screen + "+");
-                        setSubScreen("");
+                        setIsoperator(true);
                       }
                     }}
                   >
@@ -1478,6 +1295,7 @@ function App() {
                       setResultFocus(false);
                       setScreen(screen + "0");
                       setSubScreen(subScreen + "0");
+                      setIsoperator(false);
                     }}
                   >
                     0
@@ -1491,6 +1309,7 @@ function App() {
                         setResultFocus(false);
                         setScreen(screen + ".");
                         setSubScreen(subScreen + ".");
+                        setIsoperator(false);
                         setDot(true);
                       }
                     }}
