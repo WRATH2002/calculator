@@ -2,7 +2,7 @@
 My Calculator is a simple yet powerful calculator application built using React JS, JavaScript, HTML, and CSS. It is designed to provide a clean and intuitive interface for performing various arithmetic calculations.
 
 Features
-• Basic Arithmetic Operations: Perform addition, subtraction, multiplication, and division. \n
+• Basic Arithmetic Operations: Perform addition, subtraction, multiplication, and division. 
 • Clear and Reset Functionality: Easily clear the current input or reset the calculator.
 • Responsive Design: Works seamlessly on different devices and screen sizes.
 
